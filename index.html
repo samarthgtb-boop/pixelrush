@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pixel Rush — Play Free</title>
+    <meta name="description" content="Pixel Rush — free browser games.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
+        }
+    }
+    </script>
+</head>
+
+<body>
+
+<!-- ================= LOADING ================= -->
+
+<div id="loader">
+    <div class="loader-logo">
+        <span>P</span>IXEL RUSH
+    </div>
+
+    <div class="loader-line">
+        <div id="loader-progress"></div>
+    </div>
+
+    <div class="loader-text">INITIALIZING PIXEL RUSH</div>
+</div>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <a href="#home" class="brand">
+        <div class="brand-mark">PX</div>
+        <span>PIXEL RUSH</span>
+    </a>
+
+    <nav>
+        <a href="#home">HOME</a>
+        <a href="#racer">RACER</a>
+        <a href="#coming">COMING SOON</a>
+        <a href="#contact">CONTACT</a>
+    </nav>
+
+    <button id="mobile-menu-button" class="mobile-menu-button">
+        ☰
+    </button>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<main>
+
+<section id="home" class="hero">
+
+    <div class="hero-grid"></div>
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            <span></span>
+            FREE BROWSER GAMES
+        </div>
+
+        <h1>
+            PIXEL<br>
+            <strong>RUSH</strong>
+        </h1>
+
+        <p>
+            Enter a new generation of browser gaming.
+            No downloads. No installations. Just play.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#racer" class="primary-button">
+                PLAY PIXEL RACER
+                <span>→</span>
+            </a>
+
+            <a href="#coming" class="secondary-button">
+                EXPLORE
+            </a>
+        </div>
+
+    </div>
+
+    <div class="hero-bottom">
+        <span>01 / 03</span>
+        <span>SCROLL TO EXPLORE ↓</span>
+    </div>
+
+</section>
+
+
+<!-- ================= RACER ================= -->
+
+<section id="racer" class="game-section">
+
+    <div class="section-heading">
+
+        <div>
+            <div class="section-number">01 — PIXEL RUSH ORIGINAL</div>
+
+            <h2>
+                PIXEL<br>
+                <span>RACER</span>
+            </h2>
+        </div>
+
+        <div class="game-description">
+            <p>
+                Take control of a high-performance street machine,
+                navigate an open city and avoid traffic.
+            </p>
+
+            <div class="game-tags">
+                <span>OPEN WORLD</span>
+                <span>TRAFFIC</span>
+                <span>3D</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- GAME -->
+
+    <div class="game-wrapper">
+
+        <canvas id="game-canvas"></canvas>
+
+
+        <!-- START MENU -->
+
+        <div id="start-screen" class="game-overlay">
+
+            <div class="start-card">
+
+                <div class="mini-logo">PX</div>
+
+                <div class="game-label">
+                    PIXEL RUSH ORIGINAL
+                </div>
+
+                <h3>PIXEL RACER</h3>
+
+                <p>
+                    Explore the city.<br>
+                    Avoid traffic. Drive fast.
+                </p>
+
+                <button id="play-button" class="game-button">
+                    PLAY
+                    <span>→</span>
+                </button>
+
+                <button id="settings-button" class="settings-link">
+                    ⚙ SETTINGS
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- SETTINGS -->
+
+        <div id="settings-panel" class="game-overlay hidden">
+
+            <div class="settings-card">
+
+                <div class="game-label">
+                    GAME SETTINGS
+                </div>
+
+                <h3>SETTINGS</h3>
+
+                <div class="setting-row">
+
+                    <div>
+                        <strong>TOUCH CONTROLS</strong>
+                        <small>Show controls for phones and tablets</small>
+                    </div>
+
+                    <label class="switch">
+                        <input type="checkbox" id="touch-toggle">
+                        <span></span>
+                    </label>
+
+                </div>
+
+                <div class="setting-row">
+
+                    <div>
+                        <strong>TRAFFIC</strong>
+                        <small>Toggle city traffic</small>
+                    </div>
+
+                    <label class="switch">
+                        <input type="checkbox" id="traffic-toggle" checked>
+                        <span></span>
+                    </label>
+
+                </div>
+
+                <button id="close-settings" class="game-button">
+                    DONE
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- HUD -->
+
+        <div id="hud" class="hud hidden">
+
+            <div class="hud-top">
+
+                <div class="hud-box">
+                    <small>SPEED</small>
+                    <strong>
+                        <span id="speed">0</span>
+                        <em>KM/H</em>
+                    </strong>
+                </div>
+
+                <div class="hud-box compass-box">
+                    <small>DIRECTION</small>
+                    <strong id="compass">N</strong>
+                </div>
+
+            </div>
+
+            <div class="hud-bottom">
+
+                <div class="controls-help">
+                    <span>WASD</span> DRIVE
+                    <span>SPACE</span> BRAKE
+                    <span>R</span> RESET
+                </div>
+
+                <button id="pause-button">
+                    PAUSE
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PAUSE -->
+
+        <div id="pause-screen" class="game-overlay hidden">
+
+            <div class="pause-card">
+
+                <div class="game-label">PIXEL RACER</div>
+
+                <h3>PAUSED</h3>
+
+                <button id="resume-button" class="game-button">
+                    RESUME
+                </button>
+
+                <button id="restart-button" class="settings-link">
+                    RESTART RACE
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- TOUCH CONTROLS -->
+
+        <div id="touch-controls" class="touch-controls hidden">
+
+            <div class="touch-left">
+
+                <button data-control="left">←</button>
+                <button data-control="right">→</button>
+
+            </div>
+
+            <div class="touch-right">
+
+                <button data-control="brake">BRAKE</button>
+                <button data-control="accelerate">▲</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONTROLS -->
+
+    <div class="controls-panel">
+
+        <div>
+            <span class="control-icon">W</span>
+            <p>
+                <strong>ACCELERATE</strong>
+                <small>Build speed gradually</small>
+            </p>
+        </div>
+
+        <div>
+            <span class="control-icon">A</span>
+            <p>
+                <strong>STEER</strong>
+                <small>Navigate the city</small>
+            </p>
+        </div>
+
+        <div>
+            <span class="control-icon">S</span>
+            <p>
+                <strong>REVERSE</strong>
+                <small>Slow down / reverse</small>
+            </p>
+        </div>
+
+        <div>
+            <span class="control-icon">SPACE</span>
+            <p>
+                <strong>BRAKE</strong>
+                <small>Stop quickly</small>
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= COMING SOON ================= -->
+
+<section id="coming" class="coming-section">
+
+    <div class="coming-background"></div>
+
+    <div class="coming-content">
+
+        <div class="section-number">
+            02 — NEXT UP
+        </div>
+
+        <h2>
+            COMING<br>
+            <span>SOON</span>
+        </h2>
+
+        <p>
+            More games are being built for Pixel Rush.
+            Stay tuned.
+        </p>
+
+        <div class="coming-line"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= IDEA ================= -->
+
+<section id="contact" class="idea-section">
+
+    <div class="idea-inner">
+
+        <div class="section-number">
+            03 — PIXEL RUSH
+        </div>
+
+        <h2>
+            HAVE AN<br>
+            <span>IDEA?</span>
+        </h2>
+
+        <p>
+            Got an idea for a game, feature or improvement?
+            We'd love to hear it.
+        </p>
+
+        <a href="mailto:samarthgtb@gmail.com" class="idea-button">
+            EMAIL US
+            <span>→</span>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-top">
+
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+                <div class="brand-mark">PX</div>
+                <span>PIXEL RUSH</span>
+            </div>
+
+            <p>
+                Free games.<br>
+                No downloads.<br>
+                Just play.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>CREDITS</h4>
+
+            <p>Created by</p>
+            <strong>Samarth Singh</strong>
+
+        </div>
+
+
+        <div class="footer-column contact-box">
+
+            <h4>PHONE</h4>
+
+            <a href="tel:8708464035">
+                8708464035
+            </a>
+
+        </div>
+
+
+        <div class="footer-column contact-box">
+
+            <h4>EMAIL</h4>
+
+            <a href="mailto:samarthgtb@gmail.com">
+                samarthgtb@gmail.com
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>© 2026 PIXEL RUSH</span>
+
+        <span>BUILT FOR THE WEB</span>
+
+    </div>
+
+</footer>
+
+</main>
+
+
+<script type="module" src="game.js"></script>
+
+</body>
+</html>
